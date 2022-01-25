@@ -1,8 +1,6 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable no-confusing-arrow */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { countryList, monthNames } from '../../constants';
 import {
   convertExchangeRate,
@@ -10,11 +8,9 @@ import {
   removeCommaAmount,
 } from '../../utils';
 
-const buttonStyle = (country, selectedReceivingCountry) =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  country === selectedReceivingCountry
-    ? { backgroundColor: 'black', color: 'white' }
-    : null;
+const buttonStyle = (country, selectedReceivingCountry) => (country === selectedReceivingCountry
+  ? { backgroundColor: 'black', color: 'white' }
+  : null);
 
 function Tab({
   toExchangeAmount,
@@ -25,15 +21,14 @@ function Tab({
 }) {
   const { timestamp: date, quotes: rateList } = exchangeData;
   const filteredCountryList = countryList.filter(
-    (country) => country !== selectedSendingCountry
+    (country) => country !== selectedSendingCountry,
   );
 
   const getRemittanceAmount = (() => {
-    // 변환 환율 구하기
     const sendingRate = rateList[getRateKey(selectedSendingCountry)];
     const receivingRate = rateList[getRateKey(selectedReceivingCountry)];
     const exchangedRate = convertExchangeRate({ sendingRate, receivingRate });
-    // 금액
+
     const { numberAmount } = removeCommaAmount(toExchangeAmount);
     const convetedAmount = numberAmount.toFixed(2);
     const remittanceAmount = convetedAmount * exchangedRate;
@@ -73,5 +68,13 @@ function Tab({
     </div>
   );
 }
+
+Tab.propTypes = {
+  toExchangeAmount: PropTypes.string.isRequired,
+  selectedSendingCountry: PropTypes.string.isRequired,
+  selectedReceivingCountry: PropTypes.string.isRequired,
+  onSelectReceivingCountry: PropTypes.func.isRequired,
+  exchangeData: PropTypes.object.isRequired,
+};
 
 export default Tab;

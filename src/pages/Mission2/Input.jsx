@@ -1,7 +1,12 @@
 import React from 'react';
-import { checkRegax, removeCommaAmount } from '../../utils';
+import PropTypes from 'prop-types';
+import { removeCommaAmount } from '../../utils';
 
-// eslint-disable-next-line react/prop-types
+const checkRegax = (value) => {
+  const regNum = /^[0-9]*$/;
+
+  return regNum.test(value);
+};
 function Input({ toExchangeAmount, onChangeAmount }) {
   const handleChange = (e) => {
     const { value } = e.target;
@@ -21,5 +26,10 @@ function Input({ toExchangeAmount, onChangeAmount }) {
 
   return <input onChange={handleChange} value={toExchangeAmount} />;
 }
+
+Input.propTypes = {
+  toExchangeAmount: PropTypes.string.isRequired,
+  onChangeAmount: PropTypes.func.isRequired,
+};
 
 export default Input;

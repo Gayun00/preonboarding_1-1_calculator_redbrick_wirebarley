@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import Input from './Input';
 import getExchangeRate from '../../api';
@@ -7,7 +6,6 @@ import { USD, CAD, countryList } from '../../constants';
 import Tab from './Tab';
 
 function Mission2() {
-  // eslint-disable-next-line no-unused-vars
   const [toExchangeAmount, setToExchangeAmount] = useState('');
   const [exchangeData, setExchangeData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
