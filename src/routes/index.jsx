@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
-import Mission1 from '../pages/Mission1';
+import Mission1 from '../pages/Mission1/Mission1';
 import Mission2 from '../pages/Mission2';
 
 function RootRoute() {
