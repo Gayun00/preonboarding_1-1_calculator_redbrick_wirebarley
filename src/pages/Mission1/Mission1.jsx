@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { useState, useEffect, useRef } from 'react/cjs/react.development';
 import api from '../../api';
