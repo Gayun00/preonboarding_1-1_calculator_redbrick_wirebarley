@@ -2,8 +2,9 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react/cjs/react.development';
 import api from '../../api';
-import { convertPrice } from '../../utils';
+import { convertPrice, getRateKey } from '../../utils';
 import styles from './Mission1.module.css';
+import { countryList1 } from '../../constants';
 
 function Mission1() {
   const [exchangeRates, setExchangeRates] = useState({});
@@ -14,7 +15,7 @@ function Mission1() {
   const inputRef = useRef();
 
   useEffect(() => {
-    api(['KRW', 'JPY', 'PHP']).then((res) => setExchangeRates(res.data.quotes));
+    api(countryList1).then((res) => setExchangeRates(res.data.quotes));
   }, []);
 
   const selectCountry = (e) => {
@@ -63,7 +64,7 @@ function Mission1() {
         <div>
           <p className={styles.item}>
             환율 :
-            {`${convertPrice(String(exchangeRates[`USD${(selectedCountry)}`]))} ${selectedCountry}`}
+            {`${convertPrice(String(exchangeRates[getRateKey(selectedCountry)]))} ${selectedCountry}`}
             /USD
           </p>
         </div>
