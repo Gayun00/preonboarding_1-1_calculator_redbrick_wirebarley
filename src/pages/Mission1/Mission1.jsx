@@ -1,9 +1,9 @@
-/* eslint-disable no-console */
 import React from 'react';
 import { useState, useEffect, useRef } from 'react/cjs/react.development';
-import api from '../api';
-import convertPrice from '../utils';
+import api from '../../api';
+import { convertPrice, getRateKey } from '../../utils';
 import styles from './Mission1.module.css';
+import { countryList1 } from '../../constants';
 
 function Mission1() {
   const [exchangeRates, setExchangeRates] = useState({});
@@ -14,7 +14,7 @@ function Mission1() {
   const inputRef = useRef();
 
   useEffect(() => {
-    api(['KRW', 'JPY', 'PHP']).then((res) => setExchangeRates(res.data.quotes));
+    api(countryList1).then((res) => setExchangeRates(res.data.quotes));
   }, []);
 
   const selectCountry = (e) => {
@@ -63,7 +63,7 @@ function Mission1() {
         <div>
           <p className={styles.item}>
             환율 :
-            {`${convertPrice(String(exchangeRates[`USD${selectedCountry}`]))} ${selectedCountry}`}
+            {`${convertPrice(String(exchangeRates[getRateKey(selectedCountry)]))} ${selectedCountry}`}
             /USD
           </p>
         </div>
@@ -76,7 +76,14 @@ function Mission1() {
           <button type="submit" className={styles.submitBtn}>Submit</button>
         </form>
         <p className={styles.item}>{`수취금액은 ${isValid ? convertedPrice : 0} ${selectedCountry}입니다.`}</p>
-        <p className={styles.validation}>{isValid ? '' : `${validationMessage}`}</p>
+        <div className={styles.validation}>
+          {isValid ? '' : (
+            <>
+              <p>송금액이 바르지 않습니다.</p>
+              <p>{validationMessage}</p>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
