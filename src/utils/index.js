@@ -14,19 +14,6 @@ export const convertExchangeRate = (params) => {
   return receivingRate / sendingRate;
 };
 
-// 환율을 계산해주는 함수
-// params = {
-//  exchangeRate: "환율",
-//   money: "금액",
-// }
-//  return = 수취금액
-export const receiveAmount = (params) => {
-  const { exchangeRate, targetAmount } = params;
-  const amount = convertPrice(exchangeRate * targetAmount);
-
-  return amount;
-};
-
 export const removeCommaAmount = (strAmount) => {
   const stringAmount = strAmount.replace(/,/g, '');
   const numberAmount = Number(stringAmount);

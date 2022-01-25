@@ -29,6 +29,9 @@ function Mission2() {
 
   const onSelectSendingCountry = (e) => {
     const { value } = e.target;
+    if (value === selectedReceivingCountry) {
+      setSelectedReceivingCountry(selectedSendingCountry);
+    }
     setSelectedSendingCountry(value);
   };
 

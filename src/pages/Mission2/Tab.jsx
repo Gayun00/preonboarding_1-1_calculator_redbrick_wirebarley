@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable no-confusing-arrow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -8,6 +10,12 @@ import {
   removeCommaAmount,
 } from '../../utils';
 
+const buttonStyle = (country, selectedReceivingCountry) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  country === selectedReceivingCountry
+    ? { backgroundColor: 'black', color: 'white' }
+    : null;
+
 function Tab({
   toExchangeAmount,
   selectedSendingCountry,
@@ -16,8 +24,9 @@ function Tab({
   exchangeData,
 }) {
   const { timestamp: date, quotes: rateList } = exchangeData;
-  const cbfn = (country) => country !== selectedSendingCountry;
-  const filteredCountryList = countryList.filter(cbfn);
+  const filteredCountryList = countryList.filter(
+    (country) => country !== selectedSendingCountry
+  );
 
   const getRemittanceAmount = (() => {
     // 변환 환율 구하기
@@ -53,6 +62,7 @@ function Tab({
           key={country}
           name={country}
           onClick={onSelectReceivingCountry}
+          style={buttonStyle(country, selectedReceivingCountry)}
         >
           {country}
         </button>
