@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect, useRef } from 'react/cjs/react.development';
+import React, { useState, useEffect, useRef } from 'react';
 import api from '../../api';
 import { convertPrice, getRateKey } from '../../utils';
 import styles from './Mission1.module.css';
