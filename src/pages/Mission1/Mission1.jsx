@@ -76,7 +76,7 @@ function Mission1() {
           <button type="submit" className={styles.submitBtn}>Submit</button>
         </form>
         <p className={styles.item}>{`수취금액은 ${isValid ? convertedPrice : 0} ${selectedCountry}입니다.`}</p>
-        <p className={styles.validation}>{isValid ? '' : `${validationMessage}`}</p>
+        <p className={styles.validation}>{isValid ? '' : `송금액이 바르지 않습니다. ${validationMessage}`}</p>
       </div>
     </div>
   );
