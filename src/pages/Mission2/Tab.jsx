@@ -1,12 +1,16 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
-import { countryList, monthNames } from '../../constants';
+import PropTypes from 'prop-types';
+import { countryList2, monthNames } from '../../constants';
 import {
   convertExchangeRate,
   getRateKey,
   removeCommaAmount,
 } from '../../utils';
+
+const buttonStyle = (country, selectedReceivingCountry) => (country === selectedReceivingCountry
+  ? { backgroundColor: 'black', color: 'white' }
+  : null);
 
 function Tab({
   toExchangeAmount,
@@ -16,15 +20,15 @@ function Tab({
   exchangeData,
 }) {
   const { timestamp: date, quotes: rateList } = exchangeData;
-  const cbfn = (country) => country !== selectedSendingCountry;
-  const filteredCountryList = countryList.filter(cbfn);
+  const filteredCountryList = countryList2.filter(
+    (country) => country !== selectedSendingCountry,
+  );
 
   const getRemittanceAmount = (() => {
-    // 변환 환율 구하기
     const sendingRate = rateList[getRateKey(selectedSendingCountry)];
     const receivingRate = rateList[getRateKey(selectedReceivingCountry)];
     const exchangedRate = convertExchangeRate({ sendingRate, receivingRate });
-    // 금액
+
     const { numberAmount } = removeCommaAmount(toExchangeAmount);
     const convetedAmount = numberAmount.toFixed(2);
     const remittanceAmount = convetedAmount * exchangedRate;
@@ -53,6 +57,7 @@ function Tab({
           key={country}
           name={country}
           onClick={onSelectReceivingCountry}
+          style={buttonStyle(country, selectedReceivingCountry)}
         >
           {country}
         </button>
@@ -63,5 +68,13 @@ function Tab({
     </div>
   );
 }
+
+Tab.propTypes = {
+  toExchangeAmount: PropTypes.string.isRequired,
+  selectedSendingCountry: PropTypes.string.isRequired,
+  selectedReceivingCountry: PropTypes.string.isRequired,
+  onSelectReceivingCountry: PropTypes.func.isRequired,
+  exchangeData: PropTypes.object.isRequired,
+};
 
 export default Tab;

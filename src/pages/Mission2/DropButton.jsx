@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import { countryList } from '../../constants';
+import PropTypes from 'prop-types';
+import { countryList2 } from '../../constants';
 
 function DropButton({ selectedSendingCountry, onSelectSendingCountry }) {
   return (
@@ -9,7 +9,7 @@ function DropButton({ selectedSendingCountry, onSelectSendingCountry }) {
       onChange={onSelectSendingCountry}
       defaultValue={selectedSendingCountry}
     >
-      {countryList.map((country) => (
+      {countryList2.map((country) => (
         <option key={country} value={country}>
           {country}
         </option>
@@ -17,5 +17,10 @@ function DropButton({ selectedSendingCountry, onSelectSendingCountry }) {
     </select>
   );
 }
+
+DropButton.propTypes = {
+  selectedSendingCountry: PropTypes.string.isRequired,
+  onSelectSendingCountry: PropTypes.func.isRequired,
+};
 
 export default DropButton;

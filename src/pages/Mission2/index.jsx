@@ -1,13 +1,11 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import Input from './Input';
 import getExchangeRate from '../../api';
 import DropButton from './DropButton';
-import { USD, CAD, countryList } from '../../constants';
+import { USD, CAD, countryList2 } from '../../constants';
 import Tab from './Tab';
 
 function Mission2() {
-  // eslint-disable-next-line no-unused-vars
   const [toExchangeAmount, setToExchangeAmount] = useState('');
   const [exchangeData, setExchangeData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +15,7 @@ function Mission2() {
   useEffect(async () => {
     setIsLoading(true);
 
-    const res = await getExchangeRate(countryList);
+    const res = await getExchangeRate(countryList2);
     setExchangeData(res.data);
 
     setIsLoading(false);
@@ -29,6 +27,9 @@ function Mission2() {
 
   const onSelectSendingCountry = (e) => {
     const { value } = e.target;
+    if (value === selectedReceivingCountry) {
+      setSelectedReceivingCountry(selectedSendingCountry);
+    }
     setSelectedSendingCountry(value);
   };
 
