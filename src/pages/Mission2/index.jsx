@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Input from './Input';
 import getExchangeRate from '../../api';
 import DropButton from './DropButton';
-import { USD, CAD, countryList } from '../../constants';
+import { USD, CAD, countryList2 } from '../../constants';
 import Tab from './Tab';
 
 function Mission2() {
@@ -15,7 +15,7 @@ function Mission2() {
   useEffect(async () => {
     setIsLoading(true);
 
-    const res = await getExchangeRate(countryList);
+    const res = await getExchangeRate(countryList2);
     setExchangeData(res.data);
 
     setIsLoading(false);

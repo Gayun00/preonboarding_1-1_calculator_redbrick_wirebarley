@@ -1,7 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { countryList, monthNames } from '../../constants';
+import { countryList2, monthNames } from '../../constants';
 import {
   convertExchangeRate,
   getRateKey,
@@ -20,7 +20,7 @@ function Tab({
   exchangeData,
 }) {
   const { timestamp: date, quotes: rateList } = exchangeData;
-  const filteredCountryList = countryList.filter(
+  const filteredCountryList = countryList2.filter(
     (country) => country !== selectedSendingCountry,
   );
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { countryList } from '../../constants';
+import { countryList2 } from '../../constants';
 
 function DropButton({ selectedSendingCountry, onSelectSendingCountry }) {
   return (
@@ -9,7 +9,7 @@ function DropButton({ selectedSendingCountry, onSelectSendingCountry }) {
       onChange={onSelectSendingCountry}
       defaultValue={selectedSendingCountry}
     >
-      {countryList.map((country) => (
+      {countryList2.map((country) => (
         <option key={country} value={country}>
           {country}
         </option>
