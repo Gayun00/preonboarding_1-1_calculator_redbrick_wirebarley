@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { useState, useEffect, useRef } from 'react/cjs/react.development';
-import api from '../api';
-import convertPrice from '../utils';
+import api from '../../api';
+import convertPrice from '../../utils';
 import styles from './Mission1.module.css';
 
 function Mission1() {
